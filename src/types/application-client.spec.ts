@@ -1,11 +1,12 @@
 import { describe, test } from '@jest/globals'
-import algosdk, { ABIMethod, ABIStringType, ABIUintType, Account, Algodv2, getApplicationAddress, Indexer, TransactionType } from 'algosdk'
+import algosdk, { ABIMethod, ABIStringType, ABIUintType, Account, Algodv2, Indexer, TransactionType, getApplicationAddress } from 'algosdk'
+import { readFileSync } from 'fs'
+import * as path from 'path'
 import invariant from 'tiny-invariant'
 import * as algokit from '../'
 import { getTestingAppContract } from '../../tests/example-contracts/testing-app/contract'
 import { algorandFixture } from '../testing'
 import { AppSpec } from './appspec'
-
 describe('application-client', () => {
   const localnet = algorandFixture()
   beforeEach(localnet.beforeEach, 10_000)
@@ -30,6 +31,33 @@ describe('application-client', () => {
     })
     return { client, app }
   }
+
+  test('Call app with txn args', async () => {
+    const { algod, indexer, testAccount } = localnet.context
+
+    const client = algokit.getApplicationClient(
+      {
+        app: readFileSync(path.join(__dirname, '..', '..', 'tests', 'example-contracts', 'txn-arg', 'application.json')).toString('utf-8'),
+        sender: testAccount,
+        creatorAddress: testAccount.addr,
+        indexer,
+      },
+      algod,
+    )
+
+    const suggestedParams = await algod.getTransactionParams().do()
+
+    const paymentTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+      suggestedParams,
+      from: testAccount.addr,
+      to: testAccount.addr,
+      amount: 1337,
+    })
+
+    await client.create()
+
+    await client.call({ method: 'foo', methodArgs: [paymentTxn] })
+  })
 
   test('Create app', async () => {
     const { algod, indexer, testAccount } = localnet.context

@@ -1,0 +1,18 @@
+{
+    "name": "TxnArg",
+    "methods": [
+        {
+            "name": "foo",
+            "args": [
+                {
+                    "type": "pay",
+                    "name": "pay"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            }
+        }
+    ],
+    "networks": {}
+}

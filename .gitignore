@@ -56,3 +56,6 @@ out/
 # dotenv environment variable files
 .env
 .env.*
+
+# venv
+.venv/
