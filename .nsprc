@@ -1,7 +1,27 @@
 {
-  "1109842": {
+  "1115541": {
     "active": true,
-    "notes": "Bundled dependency in NPM, which cannot be overriden and has no update available yet.",
-    "expiry": "2026-01-28"
+    "notes": "brace-expansion: bundled inside npm (via semantic-release > @semantic-release/npm > npm), cannot be overridden; no fix available upstream.",
+    "expiry": "2026-12-24"
+  },
+  "1115551": {
+    "active": true,
+    "notes": "picomatch: bundled inside npm (via semantic-release > @semantic-release/npm > npm), cannot be overridden; no fix available upstream.",
+    "expiry": "2026-12-24"
+  },
+  "1115554": {
+    "active": true,
+    "notes": "picomatch: bundled inside npm (via semantic-release > @semantic-release/npm > npm), cannot be overridden; no fix available upstream.",
+    "expiry": "2026-12-24"
+  },
+  "1118827": {
+    "active": true,
+    "notes": "ip-address: bundled inside npm (via semantic-release > @semantic-release/npm > npm), cannot be overridden; no fix available upstream.",
+    "expiry": "2026-12-24"
+  },
+  "1120782": {
+    "active": true,
+    "notes": "tar: bundled inside npm (via semantic-release > @semantic-release/npm > npm), cannot be overridden; no fix available upstream.",
+    "expiry": "2026-12-24"
   }
 }
